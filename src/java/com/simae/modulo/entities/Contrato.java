@@ -76,7 +76,7 @@ public class Contrato implements Serializable {
         @JoinColumn(name = "codigoContrato", referencedColumnName = "codigoContrato")}, inverseJoinColumns = {
         @JoinColumn(name = "equipoMatricula", referencedColumnName = "matricula")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Equipo> equipoList;
+    private List<Equipo> equipos;
     @JoinColumn(name = "codigoEstadoContrato", referencedColumnName = "codigoEstadoContrato")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstadoContrato codigoEstadoContrato;
@@ -145,12 +145,12 @@ public class Contrato implements Serializable {
     }
 
     @XmlTransient
-    public List<Equipo> getEquipoList() {
-        return equipoList;
+    public List<Equipo> getEquipos() {
+        return equipos;
     }
 
-    public void setEquipoList(List<Equipo> equipoList) {
-        this.equipoList = equipoList;
+    public void setEquipos(List<Equipo> equipos) {
+        this.equipos = equipos;
     }
 
     public EstadoContrato getCodigoEstadoContrato() {

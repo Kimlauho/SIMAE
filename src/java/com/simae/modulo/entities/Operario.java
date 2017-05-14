@@ -41,7 +41,7 @@ public class Operario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "numeroDeDocumento")
-    private Integer numeroDeDocumento;
+    private Long numeroDeDocumento;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechaDeAsignacionEquipo")
@@ -57,20 +57,20 @@ public class Operario implements Serializable {
     public Operario() {
     }
 
-    public Operario(Integer numeroDeDocumento) {
+    public Operario(Long numeroDeDocumento) {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 
-    public Operario(Integer numeroDeDocumento, Date fechaDeAsignacionEquipo) {
+    public Operario(Long numeroDeDocumento, Date fechaDeAsignacionEquipo) {
         this.numeroDeDocumento = numeroDeDocumento;
         this.fechaDeAsignacionEquipo = fechaDeAsignacionEquipo;
     }
 
-    public Integer getNumeroDeDocumento() {
+    public Long getNumeroDeDocumento() {
         return numeroDeDocumento;
     }
 
-    public void setNumeroDeDocumento(Integer numeroDeDocumento) {
+    public void setNumeroDeDocumento(Long numeroDeDocumento) {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 

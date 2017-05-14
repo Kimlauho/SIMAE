@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "numeroDeDocumento")
-    private Integer numeroDeDocumento;
+    private Long numeroDeDocumento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -86,11 +86,11 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer numeroDeDocumento) {
+    public Usuario(Long numeroDeDocumento) {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 
-    public Usuario(Integer numeroDeDocumento, String nombre, String apellido, String ciudad, String clave) {
+    public Usuario(Long numeroDeDocumento, String nombre, String apellido, String ciudad, String clave) {
         this.numeroDeDocumento = numeroDeDocumento;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -98,11 +98,11 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
-    public Integer getNumeroDeDocumento() {
+    public Long getNumeroDeDocumento() {
         return numeroDeDocumento;
     }
 
-    public void setNumeroDeDocumento(Integer numeroDeDocumento) {
+    public void setNumeroDeDocumento(Long numeroDeDocumento) {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 
@@ -201,7 +201,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.simae.modulo.entities.Usuario[ numeroDeDocumento=" + numeroDeDocumento + " ]";
+        return  nombre + apellido;
     }
     
 }

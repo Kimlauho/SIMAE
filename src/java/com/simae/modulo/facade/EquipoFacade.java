@@ -10,10 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author Nena
- */
+
 @Stateless
 public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacadeLocal {
 

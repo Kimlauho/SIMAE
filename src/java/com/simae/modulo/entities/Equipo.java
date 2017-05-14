@@ -77,10 +77,10 @@ public class Equipo implements Serializable {
         @JoinColumn(name = "codigoMantenimiento", referencedColumnName = "codigoMantenimiento")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Mantenimiento> mantenimientoList;
-    @ManyToMany(mappedBy = "equipoList", fetch = FetchType.LAZY)
-    private List<Contrato> contratoList;
+    @ManyToMany(mappedBy = "equipos", fetch = FetchType.LAZY)
+    private List<Contrato> contratos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "matriculaEquipo", fetch = FetchType.LAZY)
-    private List<Operario> operarioList;
+    private List<Operario> operarios;
     @JoinColumn(name = "codigoTipoEquipo", referencedColumnName = "CodigoTipoDeEquipo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TiposEquipo codigoTipoEquipo;
@@ -150,21 +150,21 @@ public class Equipo implements Serializable {
     }
 
     @XmlTransient
-    public List<Contrato> getContratoList() {
-        return contratoList;
+    public List<Contrato> getContratos() {
+        return contratos;
     }
 
-    public void setContratoList(List<Contrato> contratoList) {
-        this.contratoList = contratoList;
+    public void setContratos(List<Contrato> contratos) {
+        this.contratos = contratos;
     }
 
     @XmlTransient
-    public List<Operario> getOperarioList() {
-        return operarioList;
+    public List<Operario> getOperarios() {
+        return operarios;
     }
 
-    public void setOperarioList(List<Operario> operarioList) {
-        this.operarioList = operarioList;
+    public void setOperarios(List<Operario> operarios) {
+        this.operarios = operarios;
     }
 
     public TiposEquipo getCodigoTipoEquipo() {
