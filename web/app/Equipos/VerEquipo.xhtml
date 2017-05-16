@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body>
+        <div>
+            <section class="panel">
+                <header class="panel-heading">
+                    Datos del Equipo
+                </header>
+                <b:panelGrid colSm="12" columns="2">
+                    <h:outputText value="Matricula"/>
+                    <h:outputText value="#{verEquipoController.equipo.matricula}" />
+                    <h:outputText value="Modelo"/>
+                    <h:outputText value="#{verEquipoController.equipo.modelo}" />
+                    <h:outputText value="Marca"/>
+                    <h:outputText value="#{verEquipoController.equipo.marca}" />
+                    <h:outputText value="Potencia"/>
+                    <h:outputText value="#{verEquipoController.equipo.potencia}" />
+                    <h:outputText value="prox. Mantenimiento"/>
+                    <h:outputText value="#{verEquipoController.equipo.fechaMantenimientoProgramado}" />
+                    <h:outputText value="Documento del Operario"/>
+                    <h:outputText value="#{verEquipoController.equipo.operario.numeroDeDocumento}" />
+                    <h:outputText value="Operario"/>
+                    <h:outputText value="#{verEquipoController.equipo.usuario.primerNombre} #{verEquipoController.equipo.usuario.SegundoNombre}" />
+            </b:panelGrid>
+                <h:link outcome="app/Equipos/listarEquipo.xhtml" styleClass="btn btn-primary"/>
+            </section>
+        </div>
+    </body>
+</html>
