@@ -17,12 +17,10 @@ import javax.enterprise.context.RequestScoped;
  *
  * @author Nena
  */
-@Named(value = "contratoController")
-@RequestScoped
+@Named(value = "vercontratoController")
+@RequestScoped //Se debe cambiar a @convesationScoped
 public class VerContratoController {
 
-    @EJB
-    private ContratoFacadeLocal cfl;
     private Contrato contrato;
     
     public VerContratoController() {
@@ -35,17 +33,13 @@ public class VerContratoController {
         return contrato;
     }
 
-    public ContratoFacadeLocal getEfl() {
-        return cfl;
-    }
-
-    public void setEfl(ContratoFacadeLocal efl) {
-        this.cfl = cfl;
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
     }
     
     public String verContrato(Contrato c){
         this.contrato = c;
-        return "app/Contratos/VerContrato.xhtml";
+        return "app/Contratos/VerContrato.xhtml?faces-redirect=true";
     }
     
     

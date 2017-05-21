@@ -39,28 +39,30 @@ public class ListarContratoController implements Serializable{
         contratos= cfl.findAll();
     }
 
-    public Contrato getContratoSeleccionado() {
-        return contratoSeleccionado;
-    }
-
-    public void setContratoSeleccionado(Contrato contratoSeleccionado) {
-        this.contratoSeleccionado = contratoSeleccionado;
-    }
-    
     public List<Contrato> getContrato(){
         return contratos;
     }
 
-    public List<Contrato> getContratos() {
-        return contratos;
+    public ContratoFacadeLocal getCfl() {
+        return cfl;
     }
 
-    public void setContratos(List<Contrato> contratos) {
-        this.contratos = contratos;
+    public void setCfl(ContratoFacadeLocal cfl) {
+        this.cfl = cfl;
     }
     
+    public Contrato getContratoSeleccionado() {
+        return contratoSeleccionado;
+    }
+    
+    public void setContratoSeleccionado(Contrato contratoSeleccionado){
+        System.out.println("usuario seleccionado = " + contratoSeleccionado);
+    this.contratoSeleccionado = contratoSeleccionado;
+    }
+   
     public void eliminarContrato(){
         cfl.remove(contratoSeleccionado);
+        recargarContratos();
     }
     
 }
