@@ -27,13 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Nena
  */
 @Entity
-@Table(name = "estadocontrato")
+@Table(name = "estadoscontrato")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EstadoContrato.findAll", query = "SELECT e FROM EstadoContrato e")
-    , @NamedQuery(name = "EstadoContrato.findByCodigoEstadoContrato", query = "SELECT e FROM EstadoContrato e WHERE e.codigoEstadoContrato = :codigoEstadoContrato")
-    , @NamedQuery(name = "EstadoContrato.findByEstado", query = "SELECT e FROM EstadoContrato e WHERE e.estado = :estado")})
-public class EstadoContrato implements Serializable {
+    @NamedQuery(name = "EstadoContrato_1.findAll", query = "SELECT e FROM EstadoContrato_1 e")
+    , @NamedQuery(name = "EstadoContrato_1.findByCodigoEstadoContrato", query = "SELECT e FROM EstadoContrato_1 e WHERE e.codigoEstadoContrato = :codigoEstadoContrato")
+    , @NamedQuery(name = "EstadoContrato_1.findByEstadoContrato", query = "SELECT e FROM EstadoContrato_1 e WHERE e.estadoContrato = :estadoContrato")})
+public class EstadoContrato_1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,21 +44,21 @@ public class EstadoContrato implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "estado")
-    private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoEstadoContrato", fetch = FetchType.LAZY)
-    private List<Contrato> contratos;
+    @Column(name = "estadoContrato")
+    private String estadoContrato;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoContrato", fetch = FetchType.LAZY)
+    private List<Contrato> contratoList;
 
-    public EstadoContrato() {
+    public EstadoContrato_1() {
     }
 
-    public EstadoContrato(Integer codigoEstadoContrato) {
+    public EstadoContrato_1(Integer codigoEstadoContrato) {
         this.codigoEstadoContrato = codigoEstadoContrato;
     }
 
-    public EstadoContrato(Integer codigoEstadoContrato, String estado) {
+    public EstadoContrato_1(Integer codigoEstadoContrato, String estadoContrato) {
         this.codigoEstadoContrato = codigoEstadoContrato;
-        this.estado = estado;
+        this.estadoContrato = estadoContrato;
     }
 
     public Integer getCodigoEstadoContrato() {
@@ -69,21 +69,21 @@ public class EstadoContrato implements Serializable {
         this.codigoEstadoContrato = codigoEstadoContrato;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstadoContrato() {
+        return estadoContrato;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoContrato(String estadoContrato) {
+        this.estadoContrato = estadoContrato;
     }
 
     @XmlTransient
-    public List<Contrato> getContratos() {
-        return contratos;
+    public List<Contrato> getContratoList() {
+        return contratoList;
     }
 
-    public void setContratos(List<Contrato> contratos) {
-        this.contratos = contratos;
+    public void setContratoList(List<Contrato> contratoList) {
+        this.contratoList = contratoList;
     }
 
     @Override
@@ -96,10 +96,10 @@ public class EstadoContrato implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EstadoContrato)) {
+        if (!(object instanceof EstadoContrato_1)) {
             return false;
         }
-        EstadoContrato other = (EstadoContrato) object;
+        EstadoContrato_1 other = (EstadoContrato_1) object;
         if ((this.codigoEstadoContrato == null && other.codigoEstadoContrato != null) || (this.codigoEstadoContrato != null && !this.codigoEstadoContrato.equals(other.codigoEstadoContrato))) {
             return false;
         }
@@ -108,7 +108,7 @@ public class EstadoContrato implements Serializable {
 
     @Override
     public String toString() {
-        return "com.simae.modulo.entities.EstadoContrato[ codigoEstadoContrato=" + codigoEstadoContrato + " ]";
+        return "com.simae.modulo.entities.EstadoContrato_1[ codigoEstadoContrato=" + codigoEstadoContrato + " ]";
     }
     
 }

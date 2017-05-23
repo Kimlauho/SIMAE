@@ -43,8 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave")
     , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
 public class Usuario implements Serializable {
-
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @NotNull
@@ -53,13 +53,26 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "primerNombre")
+    private String primerNombre;
+    @Size(max = 45)
+    @Column(name = "segundoNombre")
+    private String segundoNombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "apellido")
-    private String apellido;
+    @Column(name = "primerApellido")
+    private String primerApellido;
+    @Size(max = 45)
+    @Column(name = "segundoApellido")
+    private String segundoApellido;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "correo")
+    private String correo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "numeroDeDocumento", fetch = FetchType.LAZY)
+    private List<Operario> operarios;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -76,7 +89,7 @@ public class Usuario implements Serializable {
     @Column(name = "telefono")
     private BigInteger telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoUsuario", fetch = FetchType.LAZY)
-    private List<Mantenimiento> mantenimientoList;
+    private List<Mantenimiento> mantenimientos;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
     private Operario operario;
     @JoinColumn(name = "Rol", referencedColumnName = "identificacionRol")
@@ -90,13 +103,35 @@ public class Usuario implements Serializable {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 
-    public Usuario(Long numeroDeDocumento, String nombre, String apellido, String ciudad, String clave) {
+    public Usuario(Long numeroDeDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo, List<Operario> operarioList, String ciudad, String direccion, String clave, BigInteger telefono, List<Mantenimiento> mantenimientoList, Operario operario, Rol rol) {
         this.numeroDeDocumento = numeroDeDocumento;
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.correo = correo;
+        this.operarios = operarioList;
         this.ciudad = ciudad;
+        this.direccion = direccion;
         this.clave = clave;
+        this.telefono = telefono;
+        this.mantenimientos = mantenimientoList;
+        this.operario = operario;
+        this.rol = rol;
     }
+
+    public Usuario(Long numeroDeDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String correo, String clave, BigInteger telefono) {
+        this.numeroDeDocumento = numeroDeDocumento;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.correo = correo;
+        this.clave = clave;
+        this.telefono = telefono;
+    }
+
+    
 
     public Long getNumeroDeDocumento() {
         return numeroDeDocumento;
@@ -106,22 +141,7 @@ public class Usuario implements Serializable {
         this.numeroDeDocumento = numeroDeDocumento;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
+  
     public String getCiudad() {
         return ciudad;
     }
@@ -155,12 +175,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Mantenimiento> getMantenimientoList() {
-        return mantenimientoList;
+    public List<Mantenimiento> getMantenimientos() {
+        return mantenimientos;
     }
 
-    public void setMantenimientoList(List<Mantenimiento> mantenimientoList) {
-        this.mantenimientoList = mantenimientoList;
+    public void setMantenimientos(List<Mantenimiento> mantenimientos) {
+        this.mantenimientos = mantenimientos;
     }
 
     public Operario getOperario() {
@@ -201,7 +221,57 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return  nombre + apellido;
+        return  primerNombre + primerApellido;
     }
+
+    public String getPrimerNombre() {
+        return primerNombre;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public String getSegundoNombre() {
+        return segundoNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        this.segundoNombre = segundoNombre;
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
+    }
+
+    public String getSegundoApellido() {
+        return segundoApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        this.segundoApellido = segundoApellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    @XmlTransient
+    public List<Operario> getOperarios() {
+        return operarios;
+    }
+
+    public void setOperarios(List<Operario> operarios) {
+        this.operarios = operarios;
+    }
+
     
 }

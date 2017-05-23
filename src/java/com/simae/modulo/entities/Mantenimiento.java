@@ -40,6 +40,17 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Mantenimiento.findByFechaMantenimiento", query = "SELECT m FROM Mantenimiento m WHERE m.fechaMantenimiento = :fechaMantenimiento")})
 public class Mantenimiento implements Serializable {
 
+    @Lob
+    @Size(max = 16777215)
+    @Column(name = "detallesRevision")
+    private String detallesRevision;
+    @JoinColumn(name = "codigoTipoMantenimiento", referencedColumnName = "codigoTipoMantenimiento")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private TipoMatenimiento codigoTipoMantenimiento;
+    @JoinColumn(name = "numeroDeDocumento", referencedColumnName = "numeroDeDocumento")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Usuario numeroDeDocumento;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -160,6 +171,30 @@ public class Mantenimiento implements Serializable {
     @Override
     public String toString() {
         return "com.simae.modulo.entities.Mantenimiento[ codigoMantenimiento=" + codigoMantenimiento + " ]";
+    }
+
+    public String getDetallesRevision() {
+        return detallesRevision;
+    }
+
+    public void setDetallesRevision(String detallesRevision) {
+        this.detallesRevision = detallesRevision;
+    }
+
+    public TipoMatenimiento getCodigoTipoMantenimiento() {
+        return codigoTipoMantenimiento;
+    }
+
+    public void setCodigoTipoMantenimiento(TipoMatenimiento codigoTipoMantenimiento) {
+        this.codigoTipoMantenimiento = codigoTipoMantenimiento;
+    }
+
+    public Usuario getNumeroDeDocumento() {
+        return numeroDeDocumento;
+    }
+
+    public void setNumeroDeDocumento(Usuario numeroDeDocumento) {
+        this.numeroDeDocumento = numeroDeDocumento;
     }
     
 }

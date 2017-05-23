@@ -36,6 +36,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Rol.findByNombreRol", query = "SELECT r FROM Rol r WHERE r.nombreRol = :nombreRol")})
 public class Rol implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
+    @Column(name = "tipoRol")
+    private String tipoRol;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -121,6 +127,14 @@ public class Rol implements Serializable {
     @Override
     public String toString() {
         return "com.simae.modulo.entities.Rol[ identificacionRol=" + identificacionRol + " ]";
+    }
+
+    public String getTipoRol() {
+        return tipoRol;
+    }
+
+    public void setTipoRol(String tipoRol) {
+        this.tipoRol = tipoRol;
     }
     
 }

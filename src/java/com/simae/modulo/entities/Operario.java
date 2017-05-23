@@ -36,6 +36,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Operario.findByFechaDeAsignacionEquipo", query = "SELECT o FROM Operario o WHERE o.fechaDeAsignacionEquipo = :fechaDeAsignacionEquipo")})
 public class Operario implements Serializable {
 
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "codigoOperario")
+    private Integer codigoOperario;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -122,5 +128,19 @@ public class Operario implements Serializable {
     public String toString() {
         return "com.simae.modulo.entities.Operario[ numeroDeDocumento=" + numeroDeDocumento + " ]";
     }
+
+    public Operario(Integer codigoOperario) {
+        this.codigoOperario = codigoOperario;
+    }
+
+    public Integer getCodigoOperario() {
+        return codigoOperario;
+    }
+
+    public void setCodigoOperario(Integer codigoOperario) {
+        this.codigoOperario = codigoOperario;
+    }
+
+    
     
 }

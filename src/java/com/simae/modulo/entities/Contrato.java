@@ -44,6 +44,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Contrato.findByCostoAlquiler", query = "SELECT c FROM Contrato c WHERE c.costoAlquiler = :costoAlquiler")})
 public class Contrato implements Serializable {
 
+    @JoinTable(name = "equiposcontratos", joinColumns = {
+        @JoinColumn(name = "CodigoContrato", referencedColumnName = "codigoContrato")}, inverseJoinColumns = {
+        @JoinColumn(name = "MatriculaEquipo", referencedColumnName = "matricula")})
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Equipo> equipoList;
+    @JoinColumn(name = "estadoContrato", referencedColumnName = "codigoEstadoContrato")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EstadoContrato_1 estadoContrato;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -183,7 +192,24 @@ public class Contrato implements Serializable {
 
     @Override
     public String toString() {
-        return "com.simae.modulo.entities.Contrato[ codigoContrato=" + codigoContrato + " ]";
+        return "" + codigoContrato + "";
+    }
+
+    @XmlTransient
+    public List<Equipo> getEquipoList() {
+        return equipoList;
+    }
+
+    public void setEquipoList(List<Equipo> equipoList) {
+        this.equipoList = equipoList;
+    }
+
+    public EstadoContrato_1 getEstadoContrato() {
+        return estadoContrato;
+    }
+
+    public void setEstadoContrato(EstadoContrato_1 estadoContrato) {
+        this.estadoContrato = estadoContrato;
     }
     
 }

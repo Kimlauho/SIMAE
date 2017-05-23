@@ -76,7 +76,7 @@ public class Equipo implements Serializable {
         @JoinColumn(name = "matriculaEquipo", referencedColumnName = "matricula")}, inverseJoinColumns = {
         @JoinColumn(name = "codigoMantenimiento", referencedColumnName = "codigoMantenimiento")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Mantenimiento> mantenimientoList;
+    private List<Mantenimiento> mantenimientos;
     @ManyToMany(mappedBy = "equipos", fetch = FetchType.LAZY)
     private List<Contrato> contratos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "matriculaEquipo", fetch = FetchType.LAZY)
@@ -84,6 +84,14 @@ public class Equipo implements Serializable {
     @JoinColumn(name = "codigoTipoEquipo", referencedColumnName = "CodigoTipoDeEquipo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TiposEquipo codigoTipoEquipo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "tipoMedicionMantenimiento")
+    private String tipoMedicionMantenimiento;
+    @JoinColumn(name = "codigoEstado", referencedColumnName = "codEstado")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private EstadoEquipo codigoEstado;
 
     public Equipo() {
     }
@@ -141,12 +149,12 @@ public class Equipo implements Serializable {
     }
 
     @XmlTransient
-    public List<Mantenimiento> getMantenimientoList() {
-        return mantenimientoList;
+    public List<Mantenimiento> getMantenimientos() {
+        return mantenimientos;
     }
 
-    public void setMantenimientoList(List<Mantenimiento> mantenimientoList) {
-        this.mantenimientoList = mantenimientoList;
+    public void setMantenimientos(List<Mantenimiento> mantenimientos) {
+        this.mantenimientos = mantenimientos;
     }
 
     @XmlTransient
@@ -197,7 +205,23 @@ public class Equipo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.simae.modulo.entities.Equipo[ matricula=" + matricula + " ]";
+        return "" + matricula + " ";
+    }
+
+    public String getTipoMedicionMantenimiento() {
+        return tipoMedicionMantenimiento;
+    }
+
+    public void setTipoMedicionMantenimiento(String tipoMedicionMantenimiento) {
+        this.tipoMedicionMantenimiento = tipoMedicionMantenimiento;
+    }
+
+    public EstadoEquipo getCodigoEstado() {
+        return codigoEstado;
+    }
+
+    public void setCodigoEstado(EstadoEquipo codigoEstado) {
+        this.codigoEstado = codigoEstado;
     }
     
 }

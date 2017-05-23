@@ -41,6 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Permiso.findByIcono", query = "SELECT p FROM Permiso p WHERE p.icono = :icono")})
 public class Permiso implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -56,15 +58,15 @@ public class Permiso implements Serializable {
     @Column(name = "url")
     private String url;
     @Size(max = 45)
-    @Column(name = "icono")
+    @Column(name = "Icono")
     private String icono;
     @JoinTable(name = "rolpermiso", joinColumns = {
         @JoinColumn(name = "identificacionPermiso", referencedColumnName = "identificacionPermiso")}, inverseJoinColumns = {
         @JoinColumn(name = "identificacionRol", referencedColumnName = "identificacionRol")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Rol> rolList;
+    private List<Rol> roles;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPermisoPadre", fetch = FetchType.LAZY)
-    private List<Permiso> permisoList;
+    private List<Permiso> permisos;
     @JoinColumn(name = "idPermisoPadre", referencedColumnName = "identificacionPermiso")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Permiso idPermisoPadre;
@@ -114,21 +116,21 @@ public class Permiso implements Serializable {
     }
 
     @XmlTransient
-    public List<Rol> getRolList() {
-        return rolList;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setRolList(List<Rol> rolList) {
-        this.rolList = rolList;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
     @XmlTransient
-    public List<Permiso> getPermisoList() {
-        return permisoList;
+    public List<Permiso> getPermisos() {
+        return permisos;
     }
 
-    public void setPermisoList(List<Permiso> permisoList) {
-        this.permisoList = permisoList;
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
     }
 
     public Permiso getIdPermisoPadre() {
@@ -163,5 +165,5 @@ public class Permiso implements Serializable {
     public String toString() {
         return "com.simae.modulo.entities.Permiso[ identificacionPermiso=" + identificacionPermiso + " ]";
     }
-    
+
 }
